@@ -175,16 +175,32 @@ int main (int argc, char** argv)
     scalar = 3.0;
 
     for ( int k=0; k < NTIMES; k++) {
+#ifdef B_INIT
         LIKWID_PROFILE(INIT,init(b, scalar, N));
+#endif
+#ifdef B_SUM
         tmp = a[10];
         LIKWID_PROFILE(SUM,sum(a, N));
         a[10] = tmp;
+#endif
+#ifdef B_COPY
         LIKWID_PROFILE(COPY,copy(c, a, N));
+#endif
+#ifdef B_UPDATE
         LIKWID_PROFILE(UPDATE,update(a, scalar, N));
+#endif
+#ifdef B_TRIAD
         LIKWID_PROFILE(TRIAD,triad(a, b, c, scalar, N));
+#endif
+#ifdef B_DAXPY
         LIKWID_PROFILE(DAXPY,daxpy(a, b, scalar, N));
+#endif
+#ifdef B_STRIAD
         LIKWID_PROFILE(STRIAD,striad(a, b, c, d, N));
+#endif
+#ifdef B_SDAXPY
         LIKWID_PROFILE(SDAXPY,sdaxpy(a, b, c, N));
+#endif
     }
 
     for (int j=0; j<NUMBENCH; j++) {
