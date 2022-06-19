@@ -49,7 +49,7 @@ CPPFLAGS := $(CPPFLAGS) $(DEFINES) $(MY_OPTS) $(OPTIONS) $(INCLUDES)
 
 ${TARGET}: $(BUILD_DIR) $(OBJ)
 	$(info ===>  LINKING  $(TARGET))
-	$(Q)${LINKER} ${LFLAGS} -o $(TARGET) $(OBJ) $(LIBS)
+	$(Q)${LINKER} ${LFLAGS} -o $(TARGET) $(OBJ) $(LIBS) -static
 
 $(BUILD_DIR)/%.o:  %.c $(MAKE_DIR)/include_$(TAG).mk
 	$(info ===>  COMPILE  $@)
